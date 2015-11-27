@@ -23,7 +23,6 @@ namespace TaxPark
             this.price = price;
             this.seatCount = seatCount;
         }
-
         public string type
         {
             get { return _type; }

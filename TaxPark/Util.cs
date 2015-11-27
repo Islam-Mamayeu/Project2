@@ -16,7 +16,6 @@ namespace TaxPark
             {
                 priceResult +=taxi[i].price;
 
-                
             }
             Console.WriteLine("The Park costs :" + priceResult);
 
@@ -35,6 +34,17 @@ namespace TaxPark
 
 
             }
+        }
+        public static void SearchShow(TaxAvto taxi,int i)
+        {
+            Console.WriteLine(i+1 + ":");
+            Console.WriteLine("Name: " + taxi.model);
+            Console.WriteLine("Type: " + taxi.type);
+            Console.WriteLine("Fuel: " + taxi.fueltype);
+            Console.WriteLine("Fuel Cunsumption: " + taxi.fuelConsumption);
+            Console.WriteLine("Price: " + taxi.price);
+            Console.WriteLine("Seat Count: " + taxi.seatCount);
+
         }
         public static void ShowSortedListbyConsumption(List<TaxAvto> taxi)
         {
@@ -56,38 +66,138 @@ namespace TaxPark
             }
 
         }
-
-        public static void Searchby(List<TaxAvto> taxi)
+        public static void SearchBy(List<TaxAvto> taxi)
         {
-            int choice=0;
-            Console.WriteLine("Search :");
-            Console.WriteLine("1.By price:");
-            Console.WriteLine("2.By Fuelconsumption :");
-            Console.WriteLine("3.By Fueltype:");
-            Console.WriteLine("4.By model:");
-
-            choice =Int32.Parse(Console.ReadLine());
-
-            while(true)
+            String choice = null;
+            int ch=0;
+            bool b = true;
+            while (b)
             {
-                switch (choice)
-                {
-                    case 1:
-                        Console.WriteLine("Enter price :");
+                bool IsInt = true;
+                int counter = 0;
+                Console.WriteLine("\nSearch :");
+                Console.WriteLine("1.By price:");
+                Console.WriteLine("2.By Fuelconsumption :");
+                Console.WriteLine("3.By Fueltype:");
+                Console.WriteLine("4.By model:");
+                Console.WriteLine("5.Return:");
+
+                choice = Console.ReadLine();
+               
+                    switch (choice)
+                    {
+                       case "1":
+                        counter = 0;
+                            int price = 0;
+                            Console.WriteLine("Enter price :");
+                            IsInt = Int32.TryParse(Console.ReadLine(), out price);
+                            if (IsInt)
+                            {
+                                for (int i = 0; i < taxi.Count; i++)
+                                {
+                                    if (taxi[i].price <= price)
+                                    {
+                                        SearchShow(taxi[i], i);
+                                    counter++;
+                                    }
+
+                                }
+                            if (counter == 0) Console.WriteLine("No matches!");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Incorrect price!");
+                            }
+
+                            break;
+                    case "2":
+                        counter = 0;
+                        int fuelConsumption = 0;
+                        Console.WriteLine("Enter FuelConsumption :");
+                        IsInt = Int32.TryParse(Console.ReadLine(), out fuelConsumption);
+                        if (IsInt)
+                        {
+
+                            for (int i = 0; i < taxi.Count; i++)
+                            {
+                                if (taxi[i].fuelConsumption <= fuelConsumption)
+                                {
+                                    SearchShow(taxi[i], i);
+                                    counter++;
+                                }
+
+                            }
+                            if (counter == 0) Console.WriteLine("No matches!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Digits Only!");
+                        }
                         break;
-                    case 2:
-                        Console.WriteLine("Fuelconsumption :");
+                        case "3":
+                        
+                            Console.WriteLine("Enter Fueltype(Gas,Diesel):");
+                            while (true)
+                            {
+
+
+                                String fuelType = Console.ReadLine();
+                                if (fuelType == "Gas" || fuelType == "Diesel")
+                                {
+                                    for (int i = 0; i < taxi.Count; i++)
+                                    {
+                                        if (taxi[i].fueltype == fuelType)
+                                        {
+                                            SearchShow(taxi[i], i);
+                                            counter++;
+                                        }
+
+                                    }
+                                    if (counter == 0)
+                                    {
+                                        Console.WriteLine("No matches!");
+                                        break;
+                                    }
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("PLease enter (Gas or Diesel)");
+                                }
+                                
+                            }
                         break;
-                    case 3:
-                        Console.WriteLine("Enter Fueltype:");
+
+                    case "4":
+                            Console.WriteLine("Enter model:");
+                       
+                            String model = Console.ReadLine();
+                           
+                                for (int i = 0; i < taxi.Count; i++)
+                                {
+                                    if (taxi[i].model== model)
+                                    {
+                                        SearchShow(taxi[i], i);
+                                        counter++;
+                                    }
+
+                                }
+                                if (counter == 0)
+                                {
+                                    Console.WriteLine("No matches!");
+                                    break;
+                                }
                         break;
-                    case 4:
-                        Console.WriteLine("Enter model:");
+   
+                    case "5":
+                        b = false;
                         break;
                     default:
+                        Console.WriteLine("Incorrect choice,Please try again!");
                         break;
+                    }
                 }
-                }
+            
 
            
 

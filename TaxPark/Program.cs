@@ -10,24 +10,18 @@ namespace TaxPark
     {
         static void Main(string[] args)
         {
-            int choice = 0;
+            
             int ch = 0;
+            bool b = true;
+            bool isInt;
 
-          
-                Console.WriteLine("1.Task1(TaxPark)");
-                Console.WriteLine("2.Task2(SpeedTest)");
-
-                bool isInt = Int32.TryParse(Console.ReadLine(), out choice);
-
-            if (choice == 1)
-            {
-
-                while (true)
+                while (b)
                 {
-                    Console.WriteLine("1.Print taxi list");
+                    Console.WriteLine("\n1.Print taxi list");
                     Console.WriteLine("2.Price of TaxPark");
                     Console.WriteLine("3.Print list sorted by FuelConsumption ");
-                    Console.WriteLine("4.Search avto\n");
+                    Console.WriteLine("4.Search avto");
+                    Console.WriteLine("5.Exit\n");
 
                     List<TaxAvto> taxi = new List<TaxAvto>();
 
@@ -55,9 +49,11 @@ namespace TaxPark
                                 Util.ShowSortedListbyConsumption(taxi);
                                 break;
                             case 4:
-                                Util.Searchby(taxi);
+                                Util.SearchBy(taxi);
+                                break;                        
+                            case 5:
+                                b = false;
                                 break;
-
                             default:
                                 Console.WriteLine("Incorrect choice");
                                 break;
@@ -70,19 +66,10 @@ namespace TaxPark
                     }
                 }
             }
-            else if (choice == 2)
-            {
-
-            }
-
-            else
-            {
-                Console.WriteLine("Incorrect choice");
-            }
 
 
 
             }
 
         }
-    }
+    
